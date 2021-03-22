@@ -1,0 +1,32 @@
+﻿@model AccesoUsuarioModel
+
+@{
+    string email = "";
+    if (ViewBag.AccesoUsuario != null)
+    {
+        email = ViewBag.AccesoUsuario.Email;
+    }
+
+}
+<div class="d-flex justify-content-center">
+    <div class="card col-6">
+        <div class="card-body">
+            <form asp-action="Autentificar" method="post">
+                <h4>Acceso a sistema de ventas</h4>
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" required autofocus value="@email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control" required />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Aceptar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
