@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SistemaVentasMVC.Library;
 using SistemaVentasMVC.Models;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,18 @@ namespace SistemaVentasMVC.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string email)
         {
-            return Redirect("/Usuario/Login");
-            //return View();
+            AccesoUsuarioModel _usuario = SessionHelper.GetObjectFromJson<AccesoUsuarioModel>(HttpContext.Session, email);
+            if (_usuario != null && _usuario.Email != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Usuario/Login");
+            }
+
         }
 
         public IActionResult Privacy()

@@ -24,6 +24,12 @@ namespace SistemaVentasMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(5);//You can set Time minute as the Session
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +47,8 @@ namespace SistemaVentasMVC
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            
+            app.UseSession();
 
             app.UseRouting();
 

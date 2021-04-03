@@ -6,18 +6,14 @@ using System.Threading.Tasks;
 
 namespace SistemaVentasMVC.Models
 {
-    public class AccesoUsuarioModel
+    [Serializable]
+    public class AccesoUsuarioModel : Usuario
     {
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
-
-        [Required]
+        [Required(ErrorMessage = "Confirmar la contraseña es requerida")]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
-
-        [Display(Name = "Remember me?")]
-        public bool RememberMe { get; set; }
+        [Display(Name = "Confirmar contraseña")]
+        [Compare("Password", ErrorMessage = "El Password y la confirmación del password no son iguales.")]
+        public string ConfirmarPassword { get; set; }
     }
     
 }
